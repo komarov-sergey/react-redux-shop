@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import * as R from 'ramda'
 import {Link} from 'react-router-dom'
 
-import {fetchPhones} from 'actions'
+import {fetchPhones, loadMorePhones} from 'actions'
 import {getPhones} from 'selectors'
 
-const Phones = ({phones, fetchPhones}) => {
+const Phones = ({phones, fetchPhones, loadMorePhones}) => {
   useEffect(() => {
     fetchPhones()
   }, [])
@@ -37,9 +37,21 @@ const Phones = ({phones, fetchPhones}) => {
   }
 
   return (
-    <div className="books row">
-      {phones.map((phone, index) => renderPhone(phone, index))}
-    </div>
+    <>
+      <div className="books row">
+        {phones.map((phone, index) => renderPhone(phone, index))}
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <button
+            onClick={loadMorePhones}
+            className="pull-right btn btn-primary"
+          >
+            Load More
+          </button>
+        </div>
+      </div>
+    </>
   )
 }
 
@@ -49,6 +61,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchPhones,
+  loadMorePhones,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Phones)
