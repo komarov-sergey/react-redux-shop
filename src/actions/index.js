@@ -10,9 +10,8 @@ import {
   fetchPhones as fetchPhonesApi,
   loadMorePhones as loadMorePhonesApi,
 } from 'api'
-import {getRenderedPhonesLength} from 'selectors'
 
-export const fetchPhones = () => async (dispatch) => {
+export const fetchPhones = async (dispatch) => {
   try {
     dispatch({type: FETCH_PHONES_START})
 
@@ -27,8 +26,8 @@ export const fetchPhones = () => async (dispatch) => {
   }
 }
 
-export const loadMorePhones = () => async (dispatch, getState) => {
-  const offset = getRenderedPhonesLength(getState())
+export const loadMorePhones = async (dispatch, getState) => {
+  const offset = getState
   dispatch({type: LOAD_MORE_PHONES_START})
 
   try {

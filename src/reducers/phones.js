@@ -12,6 +12,10 @@ export default (state = initialState, {type, payload}) => {
     case LOAD_MORE_PHONES_SUCCESS:
       const moreValues = R.indexBy(R.prop('id'), payload)
       return {...state, ...moreValues}
+    case 'log':
+      console.log('log!')
+      return state
+    default:
+      return state
   }
-  return state
 }

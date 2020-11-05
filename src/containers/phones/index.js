@@ -1,15 +1,25 @@
 import React, {Component, useEffect} from 'react'
-import {connect} from 'react-redux'
+import {connect, useDispatch, useStore, useSelector} from 'react-redux'
 import * as R from 'ramda'
 import {Link} from 'react-router-dom'
 
 import {fetchPhones, loadMorePhones} from 'actions'
 import {getPhones} from 'selectors'
+import Layout from 'containers/layout'
 
-const Phones = ({phones, fetchPhones, loadMorePhones}) => {
+const Phones = () => {
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state)
+  const phonesPageIds = useSelector((state) => state.phonesPage.ids.length)
+  const phonesData = useSelector((state) => state.phones)
+
   useEffect(() => {
-    fetchPhones()
+    fetchPhones(dispatch)
   }, [])
+
+  const loadMoreClick = () => {
+    loadMorePhones(dispatch, phonesPageIds)
+  }
 
   const renderPhone = (phone, index) => {
     const shortDescription = `${R.take(60, phone.description)}...`
@@ -37,31 +47,23 @@ const Phones = ({phones, fetchPhones, loadMorePhones}) => {
   }
 
   return (
-    <>
+    <Layout>
       <div className="books row">
-        {phones.map((phone, index) => renderPhone(phone, index))}
+        {Object.keys(phonesData).length > 0 &&
+          getPhones(state).map((phone, index) => renderPhone(phone, index))}
       </div>
       <div className="row">
         <div className="col-md-12">
           <button
-            onClick={loadMorePhones}
+            onClick={loadMoreClick}
             className="pull-right btn btn-primary"
           >
             Load More
           </button>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 
-const mapStateToProps = (state) => ({
-  phones: getPhones(state),
-})
-
-const mapDispatchToProps = {
-  fetchPhones,
-  loadMorePhones,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Phones)
+export default Phones
