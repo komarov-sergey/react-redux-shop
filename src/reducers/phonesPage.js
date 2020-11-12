@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 
-import {FETCH_PHONES_SUCCESS, LOAD_MORE_PHONES_SUCCESS} from 'actionType'
+import {FETCH_PHONES_SUCCESS, LOAD_MORE_PHONES_SUCCESS} from 'actionTypes'
 
 const initialState = {
   ids: [],

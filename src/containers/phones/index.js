@@ -1,9 +1,9 @@
-import React, {Component, useEffect} from 'react'
-import {connect, useDispatch, useStore, useSelector} from 'react-redux'
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import * as R from 'ramda'
 import {Link} from 'react-router-dom'
 
-import {fetchPhones, loadMorePhones} from 'actions'
+import {fetchPhones, loadMorePhones, addPhoneToBasket} from 'actions'
 import {getPhones} from 'selectors'
 import Layout from 'containers/layout'
 
@@ -36,7 +36,12 @@ const Phones = () => {
           </h4>
           <p>{shortDescription}</p>
           <p className="itemButton">
-            <button className="btn btn-primary">Buy Now!</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => addPhoneToBasket(dispatch, phone.id)}
+            >
+              Buy Now!
+            </button>
             <Link className="btn btn-default" to={`/phones/${phone.id}`}>
               More info
             </Link>
