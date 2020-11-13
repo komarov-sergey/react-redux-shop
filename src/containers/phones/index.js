@@ -1,9 +1,14 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import * as R from 'ramda'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 
-import {fetchPhones, loadMorePhones, addPhoneToBasket} from 'actions'
+import {
+  fetchPhones,
+  fetchCategories,
+  loadMorePhones,
+  addPhoneToBasket,
+} from 'actions'
 import {getPhones} from 'selectors'
 import Layout from 'containers/layout'
 
@@ -12,9 +17,12 @@ const Phones = () => {
   const state = useSelector((state) => state)
   const phonesPageIds = useSelector((state) => state.phonesPage.ids.length)
   const phonesData = useSelector((state) => state.phones)
+  const location = useLocation()
+  const activeCategoriesId = R.last(location.pathname)
 
   useEffect(() => {
     fetchPhones(dispatch)
+    fetchCategories(dispatch)
   }, [])
 
   const loadMoreClick = () => {
@@ -55,7 +63,9 @@ const Phones = () => {
     <Layout>
       <div className="books row">
         {Object.keys(phonesData).length > 0 &&
-          getPhones(state).map((phone, index) => renderPhone(phone, index))}
+          getPhones(state, activeCategoriesId).map((phone, index) =>
+            renderPhone(phone, index)
+          )}
       </div>
       <div className="row">
         <div className="col-md-12">

@@ -13,8 +13,6 @@ const BasketCart = () => {
     )(state.basket)
   })
 
-  console.log({totalPrice})
-
   return (
     <div className="cart">
       <div className="dropdown">
