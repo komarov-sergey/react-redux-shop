@@ -4,7 +4,8 @@ import * as R from 'ramda'
 import {Link} from 'react-router-dom'
 
 import {getBasketPhonesWithCount, getTotalBasketPrice} from 'selectors'
-import {removePhoneFromBasket, cleanBasket, basketCheckout} from 'actions'
+import {basketCheckout} from 'actions'
+import {cleanBasket, removePhoneFromBasket} from 'reducers/basketSlice'
 
 const Basket = () => {
   const dispatch = useDispatch()
@@ -22,7 +23,7 @@ const Basket = () => {
       {R.not(isBasketEmpty) && (
         <div>
           <button
-            onClick={() => cleanBasket(dispatch)}
+            onClick={() => dispatch(cleanBasket())}
             className="btn btn-danger"
           >
             <span className="glyphicon glyphicon-trash"></span>
@@ -62,7 +63,7 @@ const Basket = () => {
                   <td>
                     <span
                       className="delete-cart"
-                      onClick={() => removePhoneFromBasket(dispatch, phone.id)}
+                      onClick={() => dispatch(removePhoneFromBasket(phone.id))}
                     ></span>
                   </td>
                 </tr>

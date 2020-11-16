@@ -3,7 +3,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import * as R from 'ramda'
 import {Link} from 'react-router-dom'
 
-import {fetchPhoneById, addPhoneToBasket} from 'actions'
+import {fetchPhoneById} from 'actions'
+import {addPhoneToBasket} from 'reducers/basketSlice'
+
 import BasketCart from 'components/basketCart'
 
 const Phone = ({match}) => {
@@ -72,7 +74,9 @@ const Phone = ({match}) => {
         <button
           type="button"
           className="btn btn-success btn-block"
-          onClick={() => addPhoneToBasket(dispatch, phone.id)}
+          onClick={() => {
+            dispatch(addPhoneToBasket(phone.id))
+          }}
         >
           Add to cart
         </button>

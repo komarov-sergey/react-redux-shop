@@ -4,7 +4,7 @@ import {combineReducers} from 'redux'
 import phones from 'reducers/phones'
 import phonesPage from 'reducers/phonesPage'
 import phonePage from 'reducers/phonePage'
-import basket from 'reducers/basket'
+import basketReducer from 'reducers/basketSlice'
 import categories from 'reducers/categories'
 
 export default (history) =>
@@ -13,6 +13,6 @@ export default (history) =>
     phones,
     phonesPage,
     phonePage,
-    basket,
+    basket: basketReducer,
     categories,
   })
