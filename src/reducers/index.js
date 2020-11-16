@@ -5,7 +5,7 @@ import phones from 'reducers/phones'
 import phonesPage from 'reducers/phonesPage'
 import phonePage from 'reducers/phonePage'
 import basketReducer from 'reducers/basketSlice'
-import categories from 'reducers/categories'
+import categoriesReducer from 'reducers/categoriesSlice'
 
 export default (history) =>
   combineReducers({
@@ -14,5 +14,5 @@ export default (history) =>
     phonesPage,
     phonePage,
     basket: basketReducer,
-    categories,
+    categories: categoriesReducer,
   })

@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import {createSlice} from '@reduxjs/toolkit'
 
 const basketSlice = createSlice({

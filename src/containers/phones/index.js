@@ -4,6 +4,7 @@ import * as R from 'ramda'
 import {Link, useLocation} from 'react-router-dom'
 
 import {fetchPhones, fetchCategories, loadMorePhones} from 'actions'
+import {fetchCategoriesAction} from 'reducers/categoriesSlice'
 import {getPhones} from 'selectors'
 import Layout from 'containers/layout'
 import {addPhoneToBasket} from 'reducers/basketSlice'
@@ -18,7 +19,8 @@ const Phones = () => {
 
   useEffect(() => {
     fetchPhones(dispatch)
-    fetchCategories(dispatch)
+    // fetchCategories(dispatch)
+    fetchCategoriesAction(dispatch)
   }, [])
 
   const loadMoreClick = () => {

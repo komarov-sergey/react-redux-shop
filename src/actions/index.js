@@ -9,15 +9,12 @@ import {
   FETCH_PHONES_BY_ID_SUCCESS,
   FETCH_PHONES_BY_ID_FAILURE,
   SEARCH_PHONE,
-  FETCH_CATEGORIES_START,
-  FETCH_CATEGORIES_SUCCESS,
-  FETCH_CATEGORIES_FAILURE,
 } from 'actionTypes'
 import {
   fetchPhones as fetchPhonesApi,
   loadMorePhones as loadMorePhonesApi,
   fetchPhoneById as fetchPhoneByIdApi,
-  fetchCategories as fetchCategoriesApi,
+  // fetchCategories as fetchCategoriesApi,
 } from 'api'
 
 export const fetchPhones = async (dispatch) => {
@@ -32,21 +29,6 @@ export const fetchPhones = async (dispatch) => {
     })
   } catch (e) {
     dispatch({type: FETCH_PHONES_FAILURE, payload: e, error: true})
-  }
-}
-
-export const fetchCategories = async (dispatch) => {
-  try {
-    dispatch({type: FETCH_CATEGORIES_START})
-
-    const categories = await fetchCategoriesApi()
-
-    dispatch({
-      type: FETCH_CATEGORIES_SUCCESS,
-      payload: categories,
-    })
-  } catch (e) {
-    dispatch({type: FETCH_CATEGORIES_FAILURE, payload: e, error: true})
   }
 }
 
