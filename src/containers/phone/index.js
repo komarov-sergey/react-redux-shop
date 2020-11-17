@@ -3,16 +3,18 @@ import {useDispatch, useSelector} from 'react-redux'
 import * as R from 'ramda'
 import {Link} from 'react-router-dom'
 
-import {fetchPhoneById, addPhoneToBasket} from 'actions'
+import {fetchPhoneByIdAction} from 'reducers/phonePageSlice'
+import {addPhoneToBasket} from 'reducers/basketSlice'
+
 import BasketCart from 'components/basketCart'
 
 const Phone = ({match}) => {
   const dispatch = useDispatch()
-  const phoneId = useSelector((state) => state.phonePage.id)
+  const phoneId = match.params.id
   const phone = useSelector((state) => state.phones[phoneId])
 
   useEffect(() => {
-    fetchPhoneById(dispatch, match.params.id)
+    fetchPhoneByIdAction(dispatch, match.params.id)
   }, [])
 
   const renderField = () => {
@@ -72,13 +74,17 @@ const Phone = ({match}) => {
         <button
           type="button"
           className="btn btn-success btn-block"
-          onClick={() => addPhoneToBasket(dispatch, phone.id)}
+          onClick={() => {
+            dispatch(addPhoneToBasket(phone.id))
+          }}
         >
           Add to cart
         </button>
       </div>
     )
   }
+
+  console.log(phone)
 
   return (
     <div className="view-container">

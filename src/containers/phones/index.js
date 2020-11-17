@@ -3,14 +3,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import * as R from 'ramda'
 import {Link, useLocation} from 'react-router-dom'
 
-import {
-  fetchPhones,
-  fetchCategories,
-  loadMorePhones,
-  addPhoneToBasket,
-} from 'actions'
+import {fetchPhones, fetchCategories, loadMorePhones} from 'actions'
+import {fetchCategoriesAction} from 'reducers/categoriesSlice'
 import {getPhones} from 'selectors'
 import Layout from 'containers/layout'
+import {addPhoneToBasket} from 'reducers/basketSlice'
 
 const Phones = () => {
   const dispatch = useDispatch()
@@ -22,7 +19,8 @@ const Phones = () => {
 
   useEffect(() => {
     fetchPhones(dispatch)
-    fetchCategories(dispatch)
+    // fetchCategories(dispatch)
+    fetchCategoriesAction(dispatch)
   }, [])
 
   const loadMoreClick = () => {
@@ -46,7 +44,7 @@ const Phones = () => {
           <p className="itemButton">
             <button
               className="btn btn-primary"
-              onClick={() => addPhoneToBasket(dispatch, phone.id)}
+              onClick={() => dispatch(addPhoneToBasket(phone.id))}
             >
               Buy Now!
             </button>
