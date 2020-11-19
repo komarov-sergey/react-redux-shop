@@ -1,11 +1,11 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import {useSelector} from 'react-redux'
 import * as R from 'ramda'
 import {Link, useLocation} from 'react-router-dom'
 import cl from 'classnames'
 
 const Categories = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const location = useLocation()
   const allCategories = useSelector((state) => R.values(state.categories))
   const activeCategoriesId = R.last(location.pathname)

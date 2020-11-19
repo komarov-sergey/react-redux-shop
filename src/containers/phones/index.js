@@ -23,7 +23,7 @@ const Phones = () => {
   useEffect(() => {
     fetchPhones(dispatch)
     fetchCategories(dispatch)
-  }, [])
+  }, [dispatch])
 
   const loadMoreClick = () => {
     loadMorePhones(dispatch, phonesPageIds)

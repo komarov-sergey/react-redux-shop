@@ -7,13 +7,14 @@ import {fetchPhoneById, addPhoneToBasket} from 'actions'
 import BasketCart from 'components/basketCart'
 
 const Phone = ({match}) => {
+  const id = match.params.id
   const dispatch = useDispatch()
   const phoneId = useSelector((state) => state.phonePage.id)
   const phone = useSelector((state) => state.phones[phoneId])
 
   useEffect(() => {
-    fetchPhoneById(dispatch, match.params.id)
-  }, [])
+    fetchPhoneById(dispatch, id)
+  }, [dispatch, id])
 
   const renderField = () => {
     const columnField = R.compose(
